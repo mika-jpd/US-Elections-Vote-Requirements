@@ -1,4 +1,4 @@
-# COMP251-Final-Project
+# US Election Vote Requirements
 Algorithms and Data Structures Final Project
     taught by Dr. Jérôme Waldispühl (McGill University)
     
