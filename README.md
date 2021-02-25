@@ -19,7 +19,7 @@ For each state in the United States presidential election, I compiled the inform
 The technical description of the polls makes it clear that the numbers of the first two categories are not likely to change because they are votes from people with long-time roots in a particular political party. On the other hand, people in the third category are the ones who expressed no preference and did not lean towards either of the major parties. At this point, I realized that it would be great to have a very efficient algorithm to know the minimum number of people that Mr. Biden needs to convince in order to secure the presidency of the United States of America.
 
 Provided are files containing:
-The first line of my file contains a single integer (i.e., num states) that represents the number of states taken into account by a poll.
+*       The first line of my file contains a single integer (i.e., num states) that represents the number of states taken into account by a poll.
 *     • Following num states lines each contain four integers (separated by spaces) with the following information.
 *         1. The number of delegates for a specific state. 
 *         2. The number of people who will vote for Mr. Biden in that state. 
