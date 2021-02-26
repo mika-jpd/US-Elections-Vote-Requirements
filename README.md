@@ -35,8 +35,8 @@ For states whose outcome is still uncertain, I store in different arrays:
 *       ii) the number of votes needed to be convinced for each uncertain state
 To calculate the minimum number of votes needed per state I use a variant of the dynamic programming solution to the knapsack problem:
 *        1) I setup an 2d array
-*           1.i) the first column contains only zeroes,
-*           1.ii) the first row contains Integer.MAX_VALUE
+*           1.i) the first column contains only zeroes, and represents each undecided state
+*           1.ii) the first row, apart from [0][0] contains Integer.MAX_VALUE
 *        2) If i is the number of rows and j the number of columns, each position m[i][j] will hold the minimum number of electoral votes from the first jth undecided states in order to be bigger or equal to i.
 
 The starting array looks like this:
@@ -51,16 +51,18 @@ The starting array looks like this:
 The crux of my solution algorithm is the following section:
 ```
 for (int i = 1; i <= potential_states; i++) {
-				for (int j = 1; j < states_need + 1; j++) {
-					if (potential_delegates[i-1] >= j) m[i][j] = Math.min(m[i-1][j], potential_undecided[i-1]);
+	for (int j = 1; j < states_need + 1; j++) {
+		if (potential_delegates[i-1] >= j) m[i][j] = Math.min(m[i-1][j], potential_undecided[i-1]);
 
-					else if (  (m[i-1][j] == Integer.MAX_VALUE) && (m[i-1][j-potential_delegates[i-1]] == Integer.MAX_VALUE)  ) {
-						m[i][j] = Integer.MAX_VALUE;
-					}
-					else {
-						m[i][j] = Math.min(m[i-1][j], potential_undecided[i-1] + m[i-1][j - potential_delegates[i -1]]);
+		else if (  (m[i-1][j] == Integer.MAX_VALUE) && (m[i-1][j-potential_delegates[i-1]] == Integer.MAX_VALUE)  ) {
+			m[i][j] = Integer.MAX_VALUE;
+		}
+		else {
+			m[i][j] = Math.min(m[i-1][j], potential_undecided[i-1] + m[i-1][j - potential_delegates[i -1]]);
 						
-					}
-				}
-			}
+		}
+	}
+}
 ```
+I start with Integer.MAX_VALUE so that the mnimum required voters needed for a president to get at least more than i votes will always be smaller than the values at row 0 if it is possible for the j undecided states to get at least i number of votes. Futhermore, I also use Integer.MAX_VALUE, as a signal for when the first j states cannot get at least i votes.
+
