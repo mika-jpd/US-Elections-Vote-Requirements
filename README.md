@@ -37,22 +37,17 @@ To calculate the minimum number of votes needed per state I use a variant of the
 *        1) I setup an 2d array
 *           1.i) the first column contains only zeroes,
 *           1.ii) the first row contains Integer.MAX_VALUE
-*           [0,2147483647, 2147483647,..., 2147483647]
-*           [0,         0,          0,...,          0]
-*           .
-*           .
-*           .
-*           [0,         0,          0,...,          0]
 *        2) If i is the number of rows and j the number of columns, each position m[i][j] will hold the minimum number of electoral votes from the first jth undecided states in order to be bigger or equal to i.
 
 The starting array looks like this:
+```
            [0,2147483647, 2147483647,..., 2147483647]
            [0,         0,          0,...,          0]
             .
             .
             .
             [0,         0,          0,...,          0]
-
+```
 The crux of my solution algorithm is the following section:
 ```
 for (int i = 1; i <= potential_states; i++) {
