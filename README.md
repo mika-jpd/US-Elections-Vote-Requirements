@@ -19,6 +19,7 @@ For each state in the United States presidential election, I compiled the inform
 The technical description of the polls makes it clear that the numbers of the first two categories are not likely to change because they are votes from people with long-time roots in a particular political party. On the other hand, people in the third category are the ones who expressed no preference and did not lean towards either of the major parties. At this point, I realized that it would be great to have a very efficient algorithm to know the minimum number of people that Mr. Biden needs to convince in order to secure the presidency of the United States of America.
 
 Provided are files containing:
+```
 *       The first line of my file contains a single integer (i.e., num states) that represents the number of states taken into account by a poll.
 *     • Following num states lines each contain four integers (separated by spaces) with the following information.
 *         1. The number of delegates for a specific state. 
@@ -26,19 +27,22 @@ Provided are files containing:
 *         3. The number of people who will vote for Mr. Trump in that state. 
 *         4. The number of people who have not made a voting decision in that state yet.
 For each provided file the algorithm calculates the minimum number of people that Mr. Biden would have to convince to earn the US presidency. If it is not possible for Mr. Biden to win the election, the output is the integer −1.
-
+```
 ## Solution:
 
 I first calculate the number of votes that Biden needs to win in order to and store in an array.
 For states whose outcome is still uncertain, I store in different arrays:
+```
 *       i) the number of electoral votes for each uncertain state
 *       ii) the number of votes needed to be convinced for each uncertain state
+```
 To calculate the minimum number of votes needed per state I use a variant of the dynamic programming solution to the knapsack problem:
+```
 *        1) I setup an 2d array
 *           1.i) the first column contains only zeroes, and represents each undecided state
 *           1.ii) the first row, apart from [0][0] contains Integer.MAX_VALUE
 *        2) If i is the number of rows and j the number of columns, each position m[i][j] will hold the minimum number of electoral votes from the first jth undecided states in order to be bigger or equal to i.
-
+```
 The starting array looks like this:
 ```
            [0,2147483647, 2147483647,..., 2147483647]
